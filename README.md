@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/maureenblack/mn-doctor/blob/main/package.json"><img src="https://img.shields.io/badge/version-0.1.0-c67139?style=flat-square&labelColor=201e1d" alt="version 0.1.0"></a>
+  <a href="https://github.com/maureenblack/mn-doctor/blob/main/package.json"><img src="https://img.shields.io/badge/version-1.1.0-c67139?style=flat-square&labelColor=201e1d" alt="version 1.1.0"></a>
   <a href="https://github.com/maureenblack/mn-doctor/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/maureenblack/mn-doctor/ci.yml?branch=main&style=flat-square&label=ci&labelColor=201e1d" alt="CI status"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/licence-Apache--2.0-645c50?style=flat-square&labelColor=201e1d" alt="Apache-2.0"></a>
 </p>
@@ -46,7 +46,7 @@ On 3 November 2026:
 | Language pragma | `pragma language_version` in `.compact` files |
 | Proof server | `midnightntwrk/proof-server:<tag>` in compose files, Dockerfiles, and env files |
 
-`--network` is `preview`, `preprod`, `mainnet` (the default), or `testnet` (treated as a ledger 8 public network; the docs currently name preview, preprod, and mainnet). Client pins are the same on all three. The indexer version in the data file differs by network and is reported with the source disagreement, not required in a dApp repo.
+`--network` is `preview`, `preprod`, `mainnet` (the default), or `testnet` (treated as a ledger 8 public network; the docs currently name preview, preprod, and mainnet). Client pins are the same on all three. The indexer version in the data file differs by network. A check prints one line when the docs and the SDK list disagree; `--sources` (or `--verbose`) prints each pair, wrapped. The indexer is not required in a dApp repo.
 
 Exit **0** when nothing conflicts. Exit **1** when a component targets another ledger, the compiler's runtime does not match the installed runtime, Midnight.js packages disagree with each other, or a `0.x` range can float onto another minor. Warnings, including "this matches the older SDK file", keep exit 0. `--strict` turns those warnings into failures.
 
@@ -55,6 +55,7 @@ mn-doctor check --network preprod
 mn-doctor check --json
 mn-doctor check --compact-version 0.31.1 --devtools-version 0.5.1
 mn-doctor check --strict
+mn-doctor check --sources
 ```
 
 `--compact-version` and `--devtools-version` skip probing the PATH. Use them in CI when the compiler is not installed on the runner and you still want the rest of the project checked against a chosen compiler.

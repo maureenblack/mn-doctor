@@ -159,8 +159,40 @@ describe('cli', () => {
     ]);
     assert.equal(result.status, 1);
     assert.match(result.stdout, /compact update 0\.31\.1/);
-    assert.match(result.stdout, /4\.1\.1/);
-    assert.match(result.stdout, /4\.0\.4/);
+    assert.match(result.stdout, /mn-doctor 1\.1\.0/);
+    assert.match(result.stdout, /Use --sources to see them/);
+    assert.doesNotMatch(result.stdout, /4\.0\.4/);
+  });
+
+  it('prints source disagreements with --sources', () => {
+    const result = runCli([
+      'check',
+      '--cwd',
+      'test/fixtures/good-public',
+      '--compact-version',
+      '0.31.1',
+      '--devtools-version',
+      '0.5.1',
+      '--sources',
+      '--no-color',
+    ]);
+    assert.equal(result.status, 0, result.stdout);
+    assert.match(result.stdout, /Midnight\.js: docs 4\.1\.1; sdk 4\.0\.4/);
+    for (const line of result.stdout.split('\n')) {
+      assert.ok(line.length <= 80, line);
+    }
+    const verbose = runCli([
+      'check',
+      '--cwd',
+      'test/fixtures/good-public',
+      '--compact-version',
+      '0.31.1',
+      '--devtools-version',
+      '0.5.1',
+      '--verbose',
+      '--no-color',
+    ]);
+    assert.equal(verbose.stdout, result.stdout);
   });
 
   it('prints compat data', () => {

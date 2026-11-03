@@ -24,7 +24,7 @@ function reportFor(fixture: string, toolchain: string) {
   return analyze(inspectProject(join(root, 'test', 'fixtures', fixture), compiler), data, {
     network: 'mainnet',
     networkLedgerMajor: 8,
-    toolVersion: '0.1.0',
+    toolVersion: '1.1.0',
   });
 }
 
@@ -39,7 +39,7 @@ describe('terminal report', () => {
     for (const line of lines) {
       assert.ok(line.length <= 80, `too long (${line.length}): ${line}`);
     }
-    assert.match(lines[0], /^mn-doctor 0\.1\.0 · .+ · mainnet$/);
+    assert.match(lines[0], /^mn-doctor 1\.1\.0 · .+ · mainnet$/);
     assert.match(text, /STATUS\s+COMPONENT\s+FOUND\s+EXPECTED/);
     assert.match(text, /✗ conflict\s+compact compiler\s+0\.35\.0\s+0\.31\.1/);
     assert.match(text, /✓ ok\s+compact-runtime\s+0\.16\.0\s+0\.16\.0/);
@@ -49,8 +49,22 @@ describe('terminal report', () => {
     assert.doesNotMatch(text, /0\.24\.0/);
     assert.match(text, /2 conflicts/);
     assert.match(text, /Run mn-doctor fix/);
-    assert.match(text, /docs 4\.1\.1/);
-    assert.match(text, /4\.0\.4/);
+    assert.match(text, /Note: docs and the SDK list disagree on \d+ items\. Use --sources to see them\./);
+    assert.doesNotMatch(text, /…/);
+    assert.doesNotMatch(text, /4\.0\.4/);
+  });
+
+  it('prints the full source list only with --sources, wrapped', () => {
+    const text = formatReport(reportFor('broken-compiler-ledger9', '0.35.0'), false, { sources: true });
+    const lines = plainLines(text);
+    for (const line of lines) {
+      assert.ok(line.length <= 80, `too long (${line.length}): ${line}`);
+    }
+    assert.match(text, /Midnight\.js: docs 4\.1\.1; sdk 4\.0\.4/);
+    assert.match(text, /wallet-sdk-facade/);
+    assert.match(text, /3\.0\.0/);
+    assert.doesNotMatch(text, /…/);
+    assert.doesNotMatch(text, /Use --sources to see them/);
   });
 
   it('prints a clean bill of health for the docs set', () => {

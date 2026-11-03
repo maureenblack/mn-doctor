@@ -30,6 +30,7 @@ interface Flags {
   devtoolsVersion?: string;
   noColor: boolean;
   ascii: boolean;
+  sources: boolean;
   help: boolean;
   version: boolean;
   command: string;
@@ -50,6 +51,8 @@ function readFlags(argv: string[]): Flags {
       'devtools-version': { type: 'string' },
       'no-color': { type: 'boolean', default: false },
       ascii: { type: 'boolean', default: false },
+      sources: { type: 'boolean', default: false },
+      verbose: { type: 'boolean', default: false },
       help: { type: 'boolean', short: 'h', default: false },
       version: { type: 'boolean', short: 'v', default: false },
     },
@@ -64,6 +67,7 @@ function readFlags(argv: string[]): Flags {
     devtoolsVersion: parsed.values['devtools-version'],
     noColor: parsed.values['no-color'] ?? false,
     ascii: parsed.values.ascii ?? false,
+    sources: Boolean(parsed.values.sources || parsed.values.verbose),
     help: parsed.values.help ?? false,
     version: parsed.values.version ?? false,
     command: parsed.positionals[0] ?? 'check',
@@ -88,6 +92,7 @@ Options
   --yes                           Apply fix file edits without a prompt
   --no-color
   --ascii                         Use [ok] [warn] [x] instead of Unicode symbols
+  --sources, --verbose            List every docs and SDK version disagreement
   -h, --help
   -v, --version
 
@@ -218,7 +223,7 @@ async function main(argv: string[]): Promise<number> {
       toolVersion: version,
     });
     if (flags.json) console.log(JSON.stringify(report, null, 2));
-    else console.log(formatReport(report, colorEnabled(flags), { ascii: asciiEnabled(flags) }));
+    else console.log(formatReport(report, colorEnabled(flags), { ascii: asciiEnabled(flags), sources: flags.sources }));
     return report.ok ? 0 : 1;
   }
 

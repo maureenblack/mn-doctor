@@ -25,8 +25,16 @@ function pad(text, width) {
 function visibleLength(text) {
     return text.replace(/\u001b\[[0-9;]*m/g, '').length;
 }
+function chunks(word, width) {
+    if (word.length <= width)
+        return [word];
+    const parts = [];
+    for (let i = 0; i < word.length; i += width)
+        parts.push(word.slice(i, i + width));
+    return parts;
+}
 function wrap(text, width, indent) {
-    const words = text.replace(/\s+/g, ' ').trim().split(' ');
+    const words = text.replace(/\s+/g, ' ').trim().split(' ').flatMap((word) => chunks(word, Math.max(1, width - indent.length)));
     if (words.length === 1 && words[0] === '')
         return [];
     const lines = [];
@@ -43,7 +51,11 @@ function wrap(text, width, indent) {
     }
     if (current.trim().length > 0)
         lines.push(current);
-    return lines.map((line) => (line.length > width ? line.slice(0, width) : line));
+    return lines;
+}
+function sourceNote(count) {
+    const items = count === 1 ? 'item' : 'items';
+    return `Note: docs and the SDK list disagree on ${count} ${items}. Use --sources to see them.`;
 }
 function sentences(text, count) {
     const parts = text
@@ -276,10 +288,14 @@ export function formatReport(report, color, options = {}) {
     }
     if (report.disagreements.length > 0) {
         lines.push('');
-        lines.push('Official sources disagree. This does not fail the check.');
-        for (const row of report.disagreements) {
-            const line = `  ${row.component}: docs ${row.docs}; sdk ${row.sdk}`;
-            lines.push(line.length <= WIDTH ? line : `${line.slice(0, WIDTH - 1)}…`);
+        if (options.sources) {
+            lines.push('Official sources disagree. This does not fail the check.');
+            for (const row of report.disagreements) {
+                lines.push(...wrap(`${row.component}: docs ${row.docs}; sdk ${row.sdk}`, WIDTH, '  '));
+            }
+        }
+        else {
+            lines.push(sourceNote(report.disagreements.length));
         }
     }
     for (const finding of report.findings.filter((item) => item.severity === 'info' && item.code !== 'multiple-lockfiles')) {

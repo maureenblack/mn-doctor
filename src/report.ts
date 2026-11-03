@@ -19,6 +19,8 @@ const COL_FOUND = 12;
 
 export interface FormatOptions {
   ascii?: boolean;
+  /** Print every docs-vs-SDK disagreement. Default is a one-line count. */
+  sources?: boolean;
 }
 
 function paint(text: string, code: string, enabled: boolean): string {
@@ -35,8 +37,15 @@ function visibleLength(text: string): number {
   return text.replace(/\u001b\[[0-9;]*m/g, '').length;
 }
 
+function chunks(word: string, width: number): string[] {
+  if (word.length <= width) return [word];
+  const parts: string[] = [];
+  for (let i = 0; i < word.length; i += width) parts.push(word.slice(i, i + width));
+  return parts;
+}
+
 function wrap(text: string, width: number, indent: string): string[] {
-  const words = text.replace(/\s+/g, ' ').trim().split(' ');
+  const words = text.replace(/\s+/g, ' ').trim().split(' ').flatMap((word) => chunks(word, Math.max(1, width - indent.length)));
   if (words.length === 1 && words[0] === '') return [];
   const lines: string[] = [];
   let current = indent;
@@ -50,7 +59,12 @@ function wrap(text: string, width: number, indent: string): string[] {
     }
   }
   if (current.trim().length > 0) lines.push(current);
-  return lines.map((line) => (line.length > width ? line.slice(0, width) : line));
+  return lines;
+}
+
+function sourceNote(count: number): string {
+  const items = count === 1 ? 'item' : 'items';
+  return `Note: docs and the SDK list disagree on ${count} ${items}. Use --sources to see them.`;
 }
 
 function sentences(text: string, count: number): string {
@@ -299,10 +313,13 @@ export function formatReport(report: Report, color: boolean, options: FormatOpti
 
   if (report.disagreements.length > 0) {
     lines.push('');
-    lines.push('Official sources disagree. This does not fail the check.');
-    for (const row of report.disagreements) {
-      const line = `  ${row.component}: docs ${row.docs}; sdk ${row.sdk}`;
-      lines.push(line.length <= WIDTH ? line : `${line.slice(0, WIDTH - 1)}…`);
+    if (options.sources) {
+      lines.push('Official sources disagree. This does not fail the check.');
+      for (const row of report.disagreements) {
+        lines.push(...wrap(`${row.component}: docs ${row.docs}; sdk ${row.sdk}`, WIDTH, '  '));
+      }
+    } else {
+      lines.push(sourceNote(report.disagreements.length));
     }
   }
 
