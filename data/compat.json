@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03",
+  "recommendedStackId": "docs-public-networks",
+  "publicLedgerMajor": 8,
+  "devtoolsLine": "0.5",
+  "proofServerImage": "midnightntwrk/proof-server",
+  "sources": [
+    {
+      "id": "docs-support-matrix",
+      "title": "Midnight docs support matrix",
+      "url": "https://docs.midnight.network/relnotes/support-matrix",
+      "fetchedAt": "2026-11-03"
+    },
+    {
+      "id": "sdk-compatibility",
+      "title": "midnight-sdk COMPATIBILITY.md",
+      "url": "https://github.com/midnightntwrk/midnight-sdk/blob/main/COMPATIBILITY.md",
+      "fetchedAt": "2026-11-03",
+      "statedUpdated": "2026-04-07"
+    },
+    {
+      "id": "compact-releases",
+      "title": "Compact toolchain release notes",
+      "url": "https://github.com/midnightntwrk/compact/releases",
+      "fetchedAt": "2026-11-03"
+    },
+    {
+      "id": "ledger-relnotes",
+      "title": "Ledger release notes",
+      "url": "https://docs.midnight.network/relnotes/ledger",
+      "fetchedAt": "2026-11-03"
+    },
+    {
+      "id": "npm-registry",
+      "title": "npm registry @midnight-ntwrk / @midnightntwrk",
+      "url": "https://registry.npmjs.org/@midnight-ntwrk/compact-runtime",
+      "fetchedAt": "2026-11-03"
+    }
+  ],
+  "networks": {
+    "preview": {
+      "ledgerMajor": 8,
+      "docs": {
+        "node": "1.0.400",
+        "indexer": "4.3.5",
+        "proofServer": "8.1.3",
+        "indexerNote": "Preview indexer"
+      },
+      "sdk": {
+        "node": "0.22.3",
+        "indexer": "4.0.0",
+        "proofServer": "8.0.3"
+      }
+    },
+    "preprod": {
+      "ledgerMajor": 8,
+      "docs": {
+        "node": "1.0.400",
+        "indexer": "4.3.302",
+        "proofServer": "8.1.3",
+        "indexerNote": "Preprod indexer. 4.3.302 has no public tag, release, or image yet"
+      },
+      "sdk": {
+        "node": "0.22.2",
+        "indexer": "4.0.0",
+        "proofServer": "8.0.3"
+      }
+    },
+    "mainnet": {
+      "ledgerMajor": 8,
+      "docs": {
+        "node": "1.0.400",
+        "indexer": "4.3.302",
+        "proofServer": "8.1.3",
+        "indexerNote": "Mainnet indexer. 4.3.302 has no public tag, release, or image yet"
+      },
+      "sdk": {
+        "node": "0.22.1",
+        "indexer": "4.0.0",
+        "proofServer": "8.0.3"
+      }
+    }
+  },
+  "stacks": [
+    {
+      "id": "docs-public-networks",
+      "recommended": true,
+      "ledgerMajor": 8,
+      "sourceId": "docs-support-matrix",
+      "label": "Docs support matrix (preview, preprod, mainnet)",
+      "devtools": "0.5.1",
+      "toolchain": "0.31.1",
+      "language": "0.23.0",
+      "compactRuntime": "0.16.0",
+      "compactJs": "2.5.1",
+      "platformJs": "2.2.4",
+      "midnightJs": "4.1.1",
+      "testkitJs": "4.1.1",
+      "dappConnector": "4.0.1",
+      "onchainRuntime": {
+        "name": "@midnight-ntwrk/onchain-runtime-v3",
+        "version": "3.0.0"
+      },
+      "ledger": {
+        "name": "@midnight-ntwrk/ledger-v8",
+        "version": "8.1.0",
+        "walletOnlyVersion": "8.1.3",
+        "note": "@midnight-ntwrk/midnight-js-protocol@4.1.1 depends on @midnight-ntwrk/ledger-v8@8.1.0 exactly (npm, verified 2026-11-03). The tested proof server image is midnightntwrk/proof-server:8.1.3. The wallet guide installs @midnight-ntwrk/ledger-v8@8.1.3 next to @midnightntwrk/wallet-sdk. Those are the same ledger major. A dApp that also depends on Midnight.js 4.1.1 has to keep the npm ledger pin at 8.1.0."
+      },
+      "walletSdk": {
+        "names": [
+          "@midnightntwrk/wallet-sdk",
+          "@midnight-ntwrk/wallet-sdk"
+        ],
+        "version": "1.2.0"
+      },
+      "zkir": {
+        "name": "@midnight-ntwrk/zkir-v2",
+        "version": "2.1.1"
+      },
+      "proofServer": "8.1.3",
+      "install": {
+        "compiler": "compact update 0.31.1",
+        "note": "A bare compact update installs the newest published toolchain. Compact 0.35.0 (2026-09-28) targets ledger 9, and preview, preprod, and mainnet still run ledger 8."
+      }
+    },
+    {
+      "id": "sdk-compatibility-2026-04-07",
+      "recommended": false,
+      "ledgerMajor": 8,
+      "sourceId": "sdk-compatibility",
+      "label": "midnight-sdk COMPATIBILITY.md (updated 2026-04-07)",
+      "devtools": "0.5.1",
+      "toolchain": "0.30.0",
+      "language": "0.22.0",
+      "compactRuntime": "0.15.0",
+      "compactJs": "2.5.0",
+      "platformJs": "2.2.4",
+      "midnightJs": "4.0.4",
+      "testkitJs": "4.0.4",
+      "dappConnector": "4.0.1",
+      "onchainRuntime": {
+        "name": "@midnight-ntwrk/onchain-runtime-v3",
+        "version": "3.0.0"
+      },
+      "ledger": {
+        "name": "@midnight-ntwrk/ledger-v8",
+        "version": "8.0.3"
+      },
+      "walletFacade": {
+        "name": "@midnight-ntwrk/wallet-sdk-facade",
+        "version": "3.0.0"
+      },
+      "proofServer": "8.0.3",
+      "install": {
+        "compiler": "compact update 0.30.0",
+        "note": "This older set still targets ledger 8. The docs matrix has moved on."
+      }
+    }
+  ],
+  "toolchains": [
+    {
+      "version": "0.30.0",
+      "language": "0.22.0",
+      "runtime": "0.15.0",
+      "ledgerMajor": 8,
+      "released": "2026-03-17",
+      "note": "First stable toolchain that targets Midnight ledger 8. Earlier toolchains such as 0.29 target ledger 7.",
+      "sources": [
+        "https://docs.midnight.network/relnotes/compact/toolchain-0.30.0",
+        "https://github.com/midnightntwrk/compact/releases/tag/compactc-v0.30.0"
+      ]
+    },
+    {
+      "version": "0.31.0",
+      "language": "0.23.0",
+      "runtime": "0.16.0",
+      "ledgerMajor": 8,
+      "released": "2026-04-28",
+      "sources": [
+        "https://github.com/midnightntwrk/compact/releases/tag/compactc-v0.31.0"
+      ]
+    },
+    {
+      "version": "0.31.1",
+      "language": "0.23.0",
+      "runtime": "0.16.0",
+      "ledgerMajor": 8,
+      "released": "2026-06-25",
+      "note": "Language 0.23.0 and compact-runtime 0.16.0 are unchanged from 0.31.0. This is the compiler the docs support matrix tests for public networks.",
+      "sources": [
+        "https://github.com/LFDT-Minokawa/compact/releases/tag/compactc-v0.31.1",
+        "https://docs.midnight.network/relnotes/support-matrix",
+        "https://github.com/midnightntwrk/midnight-docs/pull/1348"
+      ]
+    },
+    {
+      "version": "0.34.0",
+      "language": "0.26.0",
+      "runtime": "0.19.0",
+      "ledgerMajor": 9,
+      "released": "2026-08-18",
+      "note": "Builds on 0.33.0, which added ledger 9. Not deployed on the public networks as of the 0.34.0 notes.",
+      "sources": [
+        "https://docs.midnight.network/relnotes/compact/toolchain-0.34.0"
+      ]
+    },
+    {
+      "version": "0.35.0",
+      "language": "0.27.0",
+      "runtime": "0.20.0",
+      "ledgerMajor": 9,
+      "released": "2026-09-28",
+      "note": "Latest stable toolchain at the 2026-11-03 fetch. npm latest for @midnight-ntwrk/compact-runtime is 0.20.0, the runtime this compiler emits.",
+      "sources": [
+        "https://docs.midnight.network/relnotes/compact/toolchain-0.35.0",
+        "https://github.com/midnightntwrk/compact/releases/tag/compactc-v0.35.0"
+      ]
+    }
+  ],
+  "toolchainLedgerFallback": [
+    {
+      "min": "0.33.0",
+      "ledgerMajor": 9
+    },
+    {
+      "min": "0.30.0",
+      "ledgerMajor": 8
+    },
+    {
+      "min": "0.0.0",
+      "ledgerMajor": 7
+    }
+  ],
+  "runtimeLedgerFallback": [
+    {
+      "min": "0.18.0",
+      "ledgerMajor": 9
+    },
+    {
+      "min": "0.15.0",
+      "ledgerMajor": 8
+    },
+    {
+      "min": "0.0.0",
+      "ledgerMajor": 7
+    }
+  ],
+  "onchainRuntimeLedger": {
+    "2": 7,
+    "3": 8,
+    "4": 9
+  },
+  "releaseLines": [
+    {
+      "id": "midnight-js-4.1",
+      "match": "4.1",
+      "packages": {
+        "@midnight-ntwrk/compact-runtime": "0.16.0",
+        "@midnight-ntwrk/compact-js": "2.5.1",
+        "@midnight-ntwrk/platform-js": "2.2.4",
+        "@midnight-ntwrk/onchain-runtime-v3": "3.0.0",
+        "@midnight-ntwrk/ledger-v8": "8.1.0"
+      },
+      "source": "npm registry @midnight-ntwrk/midnight-js-protocol@4.1.1 (2026-11-03)"
+    },
+    {
+      "id": "midnight-js-4.0",
+      "match": "4.0",
+      "packages": {
+        "@midnight-ntwrk/compact-runtime": "0.15.0",
+        "@midnight-ntwrk/compact-js": "2.5.0"
+      },
+      "source": "npm view @midnight-ntwrk/midnight-js-contracts@4.0.4 depends on compact-js 2.5.0, and compact-js@2.5.0 pins compact-runtime 0.15.0 (verified 2026-11-03)."
+    }
+  ],
+  "npm": {
+    "verifiedAt": "2026-11-03",
+    "compactRuntimeDistTags": {
+      "rc": "0.21.0-rc.0",
+      "latest": "0.20.0"
+    },
+    "pins": {
+      "@midnight-ntwrk/compact-runtime@0.16.0": {
+        "@midnight-ntwrk/onchain-runtime-v3": "^3.0.0"
+      },
+      "@midnight-ntwrk/compact-runtime@0.15.0": {
+        "@midnight-ntwrk/onchain-runtime-v3": "^3.0.0"
+      },
+      "@midnight-ntwrk/compact-runtime@0.19.0": {
+        "@midnightntwrk/onchain-runtime-v4": "^4.0.0-rc.3"
+      },
+      "@midnight-ntwrk/compact-runtime@0.20.0": {
+        "@midnightntwrk/onchain-runtime-v4": "^4.0.0-rc.3"
+      },
+      "@midnight-ntwrk/compact-js@2.5.1": {
+        "@midnight-ntwrk/compact-runtime": "0.16.0",
+        "@midnight-ntwrk/ledger-v8": "^8.0.3"
+      },
+      "@midnight-ntwrk/compact-js@2.5.0": {
+        "@midnight-ntwrk/compact-runtime": "0.15.0",
+        "@midnight-ntwrk/ledger-v8": "^8.0.3"
+      },
+      "@midnightntwrk/wallet-sdk@1.2.0": {
+        "@midnightntwrk/wallet-sdk-facade": "^4.1.0"
+      }
+    }
+  },
+  "disagreements": [
+    {
+      "id": "toolchain",
+      "component": "Compact compiler",
+      "docs": "0.31.1",
+      "sdk": "0.30.0",
+      "detail": "Both target ledger 8. The docs name 0.31.1 the Compact toolchain (compact compile). COMPATIBILITY.md names 0.30.0 the Compact compiler (compactc) and uses the word toolchain for the 0.5.1 devtools CLI. mn-doctor follows the docs names. A bare compact update moves past both of these to 0.35.0, which targets ledger 9."
+    },
+    {
+      "id": "language",
+      "component": "Compact language",
+      "docs": "0.23.0 (toolchain 0.31.1 release notes)",
+      "sdk": "0.22.0",
+      "detail": "The support matrix page does not list a language version. Toolchain 0.31.1 is Compact language 0.23.0 and emits compact-runtime 0.16.0. COMPATIBILITY.md pairs language 0.22.0 with compiler 0.30.0 and runtime 0.15.0. Contracts should say pragma language_version 0.23 for the docs compiler.",
+      "editorial": true
+    },
+    {
+      "id": "compact-runtime",
+      "component": "Compact runtime",
+      "docs": "0.16.0",
+      "sdk": "0.15.0",
+      "detail": "0.x minors are breaking. npm dist-tag latest on @midnight-ntwrk/compact-runtime was 0.20.0 on 2026-11-03, and 0.20.0 targets ledger 9. An unversioned npm install does not stay on either matrix."
+    },
+    {
+      "id": "compact-js",
+      "component": "Compact JS",
+      "docs": "2.5.1",
+      "sdk": "2.5.0",
+      "detail": "compact-js@2.5.1 pins @midnight-ntwrk/compact-runtime to 0.16.0. compact-js@2.5.0 pins 0.15.0. Midnight.js 4.1.1 pulls compact-js 2.5.1 through @midnight-ntwrk/midnight-js-protocol."
+    },
+    {
+      "id": "midnight-js",
+      "component": "Midnight.js",
+      "docs": "4.1.1",
+      "sdk": "4.0.4",
+      "detail": "Both are ledger 8. The fix command uses 4.1.1 because the support matrix and the install guide are newer than COMPATIBILITY.md (dated 2026-04-07) and because midnight-js-protocol@4.1.1 records the matching runtime pin."
+    },
+    {
+      "id": "wallet",
+      "component": "Wallet SDK",
+      "docs": "@midnightntwrk/wallet-sdk 1.2.0 (also published as @midnight-ntwrk/wallet-sdk@1.2.0)",
+      "sdk": "@midnight-ntwrk/wallet-sdk-facade 3.0.0",
+      "detail": "These are different package generations. Wallet release notes say numbering tracks the barrel from 1.0.0 (23 April 2026); 1.2.0 (1 July 2026) is the first release under the @midnightntwrk scope and depends on @midnightntwrk/wallet-sdk-facade ^4.1.0. Do not treat facade 3.0.0 and barrel 1.2.0 as the same pin.",
+      "editorial": true
+    },
+    {
+      "id": "proof-server",
+      "component": "Proof server",
+      "docs": "8.1.3",
+      "sdk": "8.0.3",
+      "detail": "Same ledger major. 8.1.3 is the 2 October 2026 ledger security release. Node 1.0.400 includes ledger 8.1.3. The image is midnightntwrk/proof-server:8.1.3."
+    },
+    {
+      "id": "node",
+      "component": "Node",
+      "docs": "preview 1.0.400, preprod 1.0.400, mainnet 1.0.400",
+      "sdk": "preview 0.22.3, preprod 0.22.2, mainnet 0.22.1",
+      "detail": "The docs matrix lists node 1.0.400 on every public network. COMPATIBILITY.md still lists the 0.22.x line. dApp repositories usually do not pin the node, so this row is reported and does not fail a project check."
+    },
+    {
+      "id": "indexer",
+      "component": "Indexer",
+      "docs": "preview 4.3.5, preprod 4.3.302, mainnet 4.3.302",
+      "sdk": "4.0.0",
+      "detail": "The docs say preprod and mainnet indexer 4.3.302 has no public tag, release, or image yet. COMPATIBILITY.md lists indexer 4.0.0 in the network table and docker tags 4.0.1 for the indexer images."
+    },
+    {
+      "id": "ledger-npm",
+      "component": "Ledger npm package",
+      "docs": "matrix omits it; midnight-js-protocol@4.1.1 pins @midnight-ntwrk/ledger-v8@8.1.0; proof server and node are 8.1.3",
+      "sdk": "@midnight-ntwrk/ledger-v8 8.0.3",
+      "detail": "The support matrix does not name the ledger npm package. The ledger 8.1.3 notes say Compact and Midnight.js wire format and TypeScript declarations match 8.1.2, and that the proof server image is 8.1.3. The wallet guide installs ledger-v8@8.1.3. Midnight.js 4.1.1 cannot be installed next to a direct dependency on ledger-v8@8.1.3, because protocol requires 8.1.0 exactly.",
+      "editorial": true
+    },
+    {
+      "id": "onchain-runtime",
+      "component": "On-chain runtime",
+      "docs": "3.0.0 in the support matrix, and the exact npm pin of midnight-js-protocol@4.1.1",
+      "sdk": "3.0.0",
+      "detail": "Both matrices say 3.0.0. Separately, the ledger 8.1.3 release (2 October 2026) lists the node's on-chain runtime as 3.1.2 and ZKIR as 2.1.1. That is the Rust component inside the node. npm latest for @midnight-ntwrk/onchain-runtime-v3 was 3.1.2 on 2026-11-03, so an unpinned install does not stay on the 3.0.0 pin Midnight.js 4.1.1 uses. Compact runtime 0.19.0 and 0.20.0 depend on @midnightntwrk/onchain-runtime-v4 (no hyphen) instead of @midnight-ntwrk/onchain-runtime-v3.",
+      "editorial": true
+    }
+  ],
+  "agreements": [
+    {
+      "component": "Compact devtools",
+      "version": "0.5.1"
+    },
+    {
+      "component": "Platform JS",
+      "version": "2.2.4"
+    },
+    {
+      "component": "DApp Connector API",
+      "version": "4.0.1"
+    },
+    {
+      "component": "Public network ledger major",
+      "version": "8"
+    }
+  ],
+  "incompatibleCombinations": [
+    {
+      "id": "ledger9-toolchain-on-public-network",
+      "toolchains": [
+        "0.34.0",
+        "0.35.0"
+      ],
+      "message": "Toolchains 0.34.0 and 0.35.0 compile for ledger 9. Ledger 8 cannot read the initial contract state of those contracts, so they cannot be deployed to preview, preprod, or mainnet."
+    },
+    {
+      "id": "toolchain-034-runtime-016",
+      "toolchain": "0.34.0",
+      "runtime": "0.16.0",
+      "message": "Importing the compiled contract throws `Version mismatch: compiled code expects 0.19.0, runtime is 0.16.0`."
+    },
+    {
+      "id": "toolchain-035-runtime-016",
+      "toolchain": "0.35.0",
+      "runtime": "0.16.0",
+      "message": "Importing the compiled contract throws `Version mismatch: compiled code expects 0.20.0, runtime is 0.16.0`."
+    },
+    {
+      "id": "toolchain-031-runtime-020",
+      "toolchain": "0.31.1",
+      "runtime": "0.20.0",
+      "message": "Importing the compiled contract throws `Version mismatch: compiled code expects 0.16.0, runtime is 0.20.0`."
+    },
+    {
+      "id": "toolchain-031-runtime-019",
+      "toolchain": "0.31.1",
+      "runtime": "0.19.0",
+      "message": "Importing the compiled contract throws `Version mismatch: compiled code expects 0.16.0, runtime is 0.19.0`."
+    },
+    {
+      "id": "runtime-ledger9-with-midnight-js-411",
+      "runtimes": [
+        "0.19.0",
+        "0.20.0"
+      ],
+      "midnightJs": "4.1.1",
+      "message": "Midnight.js 4.1.1 pins @midnight-ntwrk/compact-runtime to 0.16.0 and @midnight-ntwrk/onchain-runtime-v3 to 3.0.0. Compact runtime 0.19.0 and 0.20.0 depend on @midnightntwrk/onchain-runtime-v4. deployContract throws `Failed to configure constructor context with coin public key` because Midnight.js 4.1.1 does not support ledger 9 contracts."
+    }
+  ],
+  "notes": [
+    "Fetched 2026-11-03 from the docs support matrix and midnight-sdk COMPATIBILITY.md (page date 2026-04-07). The docs matrix is the newer of the two and is what the install guide tells developers to pin.",
+    "Preview, preprod, and mainnet run ledger 8 in both sources. Compact toolchains 0.34.0 and 0.35.0 target ledger 9.",
+    "npm dist-tag latest for @midnight-ntwrk/compact-runtime was 0.20.0 on 2026-11-03. The rc tag was 0.21.0-rc.0.",
+    "Fallback ledger majors for versions missing from the toolchain table: 0.33 and newer are ledger 9, 0.30 through 0.32 are ledger 8, 0.29 and earlier are ledger 7. Runtime 0.18 and newer is treated as ledger 9 unless the toolchain table says otherwise."
+  ]
+}

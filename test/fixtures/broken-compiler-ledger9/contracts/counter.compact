@@ -1,0 +1,5 @@
+pragma language_version 0.27;
+
+import CompactStandardLibrary;
+
+export ledger count: Counter;

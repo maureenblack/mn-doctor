@@ -1,0 +1,65 @@
+name: mn-doctor
+description: Check a Midnight dApp for Compact, SDK, and proof-server version mismatches
+branding:
+  icon: activity
+  color: purple
+
+inputs:
+  network:
+    description: Target network (preview, preprod, mainnet, or testnet)
+    required: false
+    default: mainnet
+  working-directory:
+    description: Directory that contains the dApp
+    required: false
+    default: .
+  strict:
+    description: Fail unless the project matches the current docs support matrix
+    required: false
+    default: 'false'
+  json:
+    description: Print the JSON report
+    required: false
+    default: 'false'
+  compact-version:
+    description: compactc version to check when the compiler is not installed on the runner
+    required: false
+    default: ''
+  devtools-version:
+    description: compact CLI version to check when the devtools are not installed on the runner
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Check Midnight toolchain versions
+      shell: bash
+      env:
+        MN_NETWORK: ${{ inputs.network }}
+        MN_CWD: ${{ inputs.working-directory }}
+        MN_STRICT: ${{ inputs.strict }}
+        MN_JSON: ${{ inputs.json }}
+        MN_COMPACT: ${{ inputs.compact-version }}
+        MN_DEVTOOLS: ${{ inputs.devtools-version }}
+        MN_ACTION: ${{ github.action_path }}
+      run: |
+        set -euo pipefail
+        if ! command -v node >/dev/null 2>&1; then
+          echo "mn-doctor needs Node.js 20 or newer on PATH." >&2
+          exit 2
+        fi
+        args=(check --network "$MN_NETWORK" --cwd "$MN_CWD")
+        if [ "$MN_STRICT" = "true" ]; then
+          args+=(--strict)
+        fi
+        if [ "$MN_JSON" = "true" ]; then
+          args+=(--json)
+        fi
+        if [ -n "$MN_COMPACT" ]; then
+          args+=(--compact-version "$MN_COMPACT")
+        fi
+        if [ -n "$MN_DEVTOOLS" ]; then
+          args+=(--devtools-version "$MN_DEVTOOLS")
+        fi
+        node "$MN_ACTION/dist/cli.js" "${args[@]}"

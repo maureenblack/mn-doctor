@@ -1,0 +1,49 @@
+{
+  "name": "mn-doctor",
+  "version": "0.1.0",
+  "description": "Detect and fix Midnight Network toolchain version mismatches.",
+  "type": "module",
+  "bin": {
+    "mn-doctor": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "data",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "Maureen",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maureenblack/mn-doctor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maureenblack/mn-doctor/issues"
+  },
+  "homepage": "https://github.com/maureenblack/mn-doctor#readme",
+  "keywords": [
+    "midnight",
+    "midnight-network",
+    "compact",
+    "compactc",
+    "cli",
+    "toolchain"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/cli.js",
+    "test": "npm run build && tsx --test test/*.test.ts",
+    "compat:refresh": "npm run build && node dist/refresh-main.js",
+    "demo": "bash scripts/demo.sh",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

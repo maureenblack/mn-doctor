@@ -1,0 +1,10 @@
+{
+  "name": "broken-runtime-ledger9",
+  "private": true,
+  "dependencies": {
+    "@midnight-ntwrk/compact-runtime": "0.20.0",
+    "@midnight-ntwrk/midnight-js": "4.1.1",
+    "@midnight-ntwrk/midnight-js-contracts": "4.1.1",
+    "@midnightntwrk/onchain-runtime-v4": "4.0.0-rc.3"
+  }
+}

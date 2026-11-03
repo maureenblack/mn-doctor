@@ -1,0 +1,9 @@
+{
+  "name": "mixed-midnight-js",
+  "private": true,
+  "dependencies": {
+    "@midnight-ntwrk/compact-runtime": "0.16.0",
+    "@midnight-ntwrk/midnight-js": "4.1.1",
+    "@midnight-ntwrk/midnight-js-contracts": "4.0.4"
+  }
+}

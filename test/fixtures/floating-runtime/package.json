@@ -1,0 +1,8 @@
+{
+  "name": "floating-runtime",
+  "private": true,
+  "dependencies": {
+    "@midnight-ntwrk/compact-runtime": "*",
+    "@midnight-ntwrk/midnight-js": "4.1.1"
+  }
+}
