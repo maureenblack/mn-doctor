@@ -154,7 +154,7 @@ npm test
 npm run demo
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). The license is [Apache-2.0](LICENSE).
+See [CONTRIBUTING.md](CONTRIBUTING.md). The license is [Apache-2.0](LICENSE). Copyright is in [NOTICE](NOTICE).
 
 ## Limits of v1
 
