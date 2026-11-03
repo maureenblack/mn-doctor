@@ -24,6 +24,7 @@ function readFlags(argv) {
             'compact-version': { type: 'string' },
             'devtools-version': { type: 'string' },
             'no-color': { type: 'boolean', default: false },
+            ascii: { type: 'boolean', default: false },
             help: { type: 'boolean', short: 'h', default: false },
             version: { type: 'boolean', short: 'v', default: false },
         },
@@ -37,6 +38,7 @@ function readFlags(argv) {
         compactVersion: parsed.values['compact-version'],
         devtoolsVersion: parsed.values['devtools-version'],
         noColor: parsed.values['no-color'] ?? false,
+        ascii: parsed.values.ascii ?? false,
         help: parsed.values.help ?? false,
         version: parsed.values.version ?? false,
         command: parsed.positionals[0] ?? 'check',
@@ -59,6 +61,7 @@ Options
   --devtools-version <ver>        Use this compact CLI version instead of probing the PATH
   --yes                           Apply fix file edits without a prompt
   --no-color
+  --ascii                         Use [ok] [warn] [x] instead of Unicode symbols
   -h, --help
   -v, --version
 
@@ -77,6 +80,12 @@ function toolVersion() {
 }
 function colorEnabled(flags) {
     return !flags.json && !flags.noColor && Boolean(process.stdout.isTTY) && !process.env.NO_COLOR;
+}
+function asciiEnabled(flags) {
+    if (flags.ascii)
+        return true;
+    const locale = process.env.LC_ALL || process.env.LC_CTYPE || process.env.LANG || '';
+    return locale.length > 0 && !/utf-?8/i.test(locale);
 }
 function compilerFrom(flags, devtoolsLine) {
     return probeCompiler(devtoolsLine, {
@@ -173,7 +182,7 @@ async function main(argv) {
         if (flags.json)
             console.log(JSON.stringify(report, null, 2));
         else
-            console.log(formatReport(report, colorEnabled(flags)));
+            console.log(formatReport(report, colorEnabled(flags), { ascii: asciiEnabled(flags) }));
         return report.ok ? 0 : 1;
     }
     const manifestPlan = planFix(snapshot, data);

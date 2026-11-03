@@ -1,18 +1,26 @@
-# mn-doctor
+<p align="center">
+  <img src="assets/brand/readme-banner.png" alt="mn-doctor. A calm doctor for your Midnight toolchain." width="1280">
+</p>
 
-[![CI](https://github.com/maureenblack/mn-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/maureenblack/mn-doctor/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![Node](https://img.shields.io/badge/node-%3E%3D20-339933.svg)](package.json)
+<p align="center">
+  <a href="https://github.com/maureenblack/mn-doctor/blob/main/package.json"><img src="https://img.shields.io/badge/version-0.1.0-c67139?style=flat-square&labelColor=201e1d" alt="version 0.1.0"></a>
+  <a href="https://github.com/maureenblack/mn-doctor/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/maureenblack/mn-doctor/ci.yml?branch=main&style=flat-square&label=ci&labelColor=201e1d" alt="CI status"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/licence-Apache--2.0-645c50?style=flat-square&labelColor=201e1d" alt="Apache-2.0"></a>
+</p>
 
-`mn-doctor` checks a Midnight dApp for toolchain versions that cannot deploy together, and it prints a known-good set when they cannot.
+# A calm doctor for your Midnight toolchain.
+
+mn-doctor checks that your Compact compiler, runtime packages and proof server are on matching versions, explains any mismatch in plain English, and fixes it after showing you the diff.
 
 ```bash
 npx mn-doctor
-npx mn-doctor check --network preprod
-npx mn-doctor fix
 ```
 
-The npm package name `mn-doctor` is reserved for a later publish. Until then, run it from a checkout with `npm ci && npm run build && npx .`.
+<img src="assets/brand/terminal-check.png" alt="mn-doctor check on the ledger 9 compiler fixture" width="720">
+
+That screenshot is a real `mn-doctor check` of `test/fixtures/broken-compiler-ledger9`: Compact compiler **0.35.0** (ledger 9) against compact-runtime **0.16.0**, Midnight.js **4.1.1**, and `midnightntwrk/proof-server:8.1.3`. The fix it prints is `compact update 0.31.1`.
+
+The npm package is not published yet. From a checkout: `npm ci && npm run build && npx .`. The brand guide is [docs/brand-guide.html](docs/brand-guide.html).
 
 ## Why this exists
 
@@ -51,23 +59,7 @@ mn-doctor check --strict
 
 `--compact-version` and `--devtools-version` skip probing the PATH. Use them in CI when the compiler is not installed on the runner and you still want the rest of the project checked against a chosen compiler.
 
-A clean project that matches the docs matrix looks like this:
-
-```text
-mn-doctor check
-Project   /path/to/app
-Network   mainnet · public networks in this data set run ledger 8
-
-Components
-  ok        Compact devtools
-            0.5.1
-  ok        Compact compiler
-            0.31.1 · ledger 8
-  ok        @midnight-ntwrk/compact-runtime
-            0.16.0 · ledger 8
-```
-
-A bare `compact update` onto 0.35.0, with runtime 0.16.0 still installed, exits 1 and names both the runtime error and the pin to run instead: `compact update 0.31.1`.
+A project on the docs set prints a clean bill of health: compiler **0.31.1**, compact-runtime **0.16.0**, Midnight.js **4.1.1**, proof server **8.1.3**. A bare `compact update` onto 0.35.0, with runtime 0.16.0 still installed, exits 1 and tells you to run `compact update 0.31.1`.
 
 ## `fix`
 
@@ -142,7 +134,7 @@ jobs:
 
 The action is composite and runs `dist/cli.js` from the action repository. The check fails the step when the CLI exits 1.
 
-Pin the action to a commit SHA or a tag once a release is cut. `v1` in the example is that future tag.
+`v1` tracks the current action interface. `v1.0.0` stays on the first tagged commit.
 
 ## Development
 
